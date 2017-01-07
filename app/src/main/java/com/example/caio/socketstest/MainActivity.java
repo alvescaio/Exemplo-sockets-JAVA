@@ -43,25 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void conectarSocket() {
         try {
             txvRetornoSocket.setText("Conectando...");
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        servidor = new Socket("192.168.0.20", 3232);
-                    } catch (IOException e) {
-                        txvRetornoSocket.setText("Exception 1: "+e.getMessage());
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            servidor.close();
-                        } catch (IOException e) {
-                            txvRetornoSocket.setText("Exception 2: "+e.getMessage());
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-
+            servidor = new Socket("192.168.0.20", 3232);
             txvRetornoSocket.setText("Socket iniciado!!");
 
             new Thread(new Runnable() {
