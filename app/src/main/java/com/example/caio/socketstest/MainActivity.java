@@ -47,25 +47,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void conectarSocket() {
         try {
-            try {
-                txvRetornoSocket.setText("Conectando...");
-                servidor = new Socket("192.168.0.20", 3232);
-                txvRetornoSocket.setText("Socket iniciado!!");
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-
-            try {
-                InputStream dadosServidor = servidor.getInputStream();
-                Scanner s = new Scanner(dadosServidor);
-                while(s.hasNextLine()){
-                    txvRetornoSocket.setText(s.nextLine());
+            txvRetornoSocket.setText("Conectando...");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        servidor = new Socket("192.168.0.20", 3232);
+                    } catch (IOException e) {
+                        txvRetornoSocket.setText("Exception 1: "+e.getMessage());
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            servidor.close();
+                        } catch (IOException e) {
+                            txvRetornoSocket.setText("Exception 2: "+e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            });
+
+            txvRetornoSocket.setText("Socket iniciado!!");
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        InputStream dadosServidor = servidor.getInputStream();
+                        Scanner s = new Scanner(dadosServidor);
+                        while(s.hasNextLine()){
+                            txvRetornoSocket.setText(s.nextLine());
+                        }
+                    } catch (IOException e) {
+                        txvRetornoSocket.setText("Exception 4: "+e.getMessage());
+                        e.printStackTrace();
+                    }
+
+                }
+            }).start();
 
         }catch (Exception e){
+            txvRetornoSocket.setText("Exception 3: "+e.getMessage());
             e.printStackTrace();
             System.out.println("Erro: "+e.getMessage());
         }
