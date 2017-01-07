@@ -29,12 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 if(v == btnConexao){
                     Toast.makeText(MainActivity.this, "Conectando...", Toast.LENGTH_SHORT).show();
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            conectarSocket();
-                        }
-                    }).start();
+                    conectarSocket();
                 }
             }
         });
