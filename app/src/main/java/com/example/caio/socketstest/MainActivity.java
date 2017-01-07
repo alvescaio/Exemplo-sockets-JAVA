@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
     }
 
-    private class ConexaoSocket extends AsyncTask<Void, Scanner, Void>{
+    private class ConexaoSocket extends AsyncTask<Void, String, Void>{
 
         @Override
         protected void onPreExecute(){
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 try {
                     Scanner s = new Scanner(servidor.getInputStream());
                     while(s.hasNextLine()){
-                        publishProgress(s);
+                        publishProgress(s.nextLine());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -72,9 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         @Override
-        protected void onProgressUpdate(Scanner... s) {
+        protected void onProgressUpdate(String... s) {
             if(s.length > 0){
-                txvRetornoSocket.setText(s[0].nextLine());
+                if(load.isShowing()){
+                    load.dismiss();
+                }
+                txvRetornoSocket.setText(s[0]);
             }
         }
 
