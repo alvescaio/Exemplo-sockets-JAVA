@@ -31,8 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         editText = (EditText) findViewById(R.id.editText);
+
         btnEnviar = (Button) findViewById(R.id.btnEnviar);
         btnEnviar.setClickable(false);
+        btnEnviar.setEnabled(false);
+
         txvRetornoSocket = (TextView) findViewById(R.id.txvRetornoSocket);
         btnConexao = (Button) findViewById(R.id.btnConexao);
         btnConexao.setOnClickListener(new View.OnClickListener() {
@@ -47,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v == btnEnviar && editText.getText().toString() != null){
-                    cs.doInBackground(editText.getText().toString());
+                if(v == btnEnviar){
+                    cs.enviarParaServidor(editText.toString());
                 }
             }
         });
@@ -61,12 +64,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private class ConexaoSocket extends AsyncTask<String, String, Void>{
 
+        private PrintStream saidaServidor;
+
         @Override
         protected void onPreExecute(){
             Log.i("AsyncTask", "Exibindo ProgressDialog na tela Thread: "+Thread.currentThread().getName());
             btnConexao.setClickable(false);
+            btnConexao.setEnabled(false);
             btnEnviar.setClickable(true);
-            editText.setText(null);
+            btnEnviar.setEnabled(true);
+            editText.setText("");
             load = ProgressDialog.show(MainActivity.this, "Por favor aguarde...", "Conectando...");
 
         }
@@ -77,14 +84,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             try {
                 servidor = new Socket("192.168.0.20", 3232);
                 try {
+                    saidaServidor = new PrintStream(servidor.getOutputStream());
                     Scanner s = new Scanner(servidor.getInputStream());
+
                     while (s.hasNextLine()) {
                         publishProgress(s.nextLine());
-                    }
-
-                    if (args[0] != null) {
-                        PrintStream servidorSaida = new PrintStream(servidor.getOutputStream());
-                    servidorSaida.println(args[0]);
                     }
                     s.close();
                 } catch (IOException e) {
@@ -113,6 +117,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(load.isShowing()){
                 load.dismiss();
             }
+        }
+
+        public void enviarParaServidor(String s){
+            saidaServidor.println(s);
         }
     }
 }
