@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
     }
 
-    private class ConexaoSocket extends AsyncTask<Void, Void, Socket>{
+    private class ConexaoSocket extends AsyncTask<Void, Scanner, Void>{
 
         @Override
         protected void onPreExecute(){
@@ -52,28 +52,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         @Override
-        protected Socket doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids) {
             Socket servidor = null;
             try {
                 servidor = new Socket("192.168.0.20", 3232);
-            }catch (Exception e){
-                e.printStackTrace();
-                System.out.println("Erro: "+e.getMessage());
-            }
-            return servidor;
-        }
-
-        @Override
-        protected void onPostExecute(Socket servidor){
-            if(servidor != null){
                 try {
                     Scanner s = new Scanner(servidor.getInputStream());
                     while(s.hasNextLine()){
-                        txvRetornoSocket.setText(s.nextLine());
+                        publishProgress(s);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Erro: "+e.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Scanner... s) {
+            if(s.length > 0){
+                txvRetornoSocket.setText(s[0].nextLine());
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if(load.isShowing()){
+                load.dismiss();
             }
         }
     }
