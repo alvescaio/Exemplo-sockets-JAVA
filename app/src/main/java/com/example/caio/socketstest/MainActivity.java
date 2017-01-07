@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,15 +21,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnConexao = (Button) findViewById(R.id.btnConexao);
         txvRetornoSocket = (TextView) findViewById(R.id.txvRetornoSocket);
+        btnConexao = (Button) findViewById(R.id.btnConexao);
+        btnConexao.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(v == btnConexao){
+                    Toast.makeText(MainActivity.this, "Conectando...", Toast.LENGTH_SHORT).show();
+                    conectarSocket();
+                }
+            }
+        });
+
     }
 
     @Override
-    public void onClick(View v){
-        if(v == btnConexao){
-            conectarSocket();
-        }
+    public void onClick(View v) {
     }
 
     private void conectarSocket() {
@@ -37,8 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ObjectOutputStream canalSaida = null;
             ObjectInputStream canalEntrada = null;
 
+            System.out.println("Iniciando socket na porta 3232...");
             socket = new Socket("192.168.0.20", 3232);
 
+            System.out.println("Socket iniciado!!");
             canalSaida = new ObjectOutputStream(socket.getOutputStream());
             canalSaida.writeObject("Teste");
 
@@ -48,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txvRetornoSocket.setText(obj.toString());
             }
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println("Erro: "+e.getMessage());
         }
     }
