@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             txvRetornoSocket.setText(s.nextLine());
                         }
                     } catch (IOException e) {
-                        txvRetornoSocket.setText("Exception 4: "+e.getMessage());
+                        txvRetornoSocket.setText("Exception 4: "+e.getStackTrace());
                         e.printStackTrace();
                     }
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }).start();
 
         }catch (Exception e){
-            txvRetornoSocket.setText("Exception 3: "+e.getMessage());
+            txvRetornoSocket.setText("Exception 3: "+e.getStackTrace());
             e.printStackTrace();
             System.out.println("Erro: "+e.getMessage());
         }
