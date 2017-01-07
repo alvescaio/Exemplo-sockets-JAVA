@@ -1,5 +1,6 @@
 package com.example.caio.socketstest;
 
+import android.support.v4.widget.SearchViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,14 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnConexao;
     private TextView txvRetornoSocket;
+    private Socket servidor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +43,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void conectarSocket() {
         try {
-            Socket socket = null;
-            ObjectOutputStream canalSaida = null;
-            ObjectInputStream canalEntrada = null;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        txvRetornoSocket.setText("Conectando...");
+                        servidor = new Socket("192.168.0.20", 3232);
+                        txvRetornoSocket.setText("Socket iniciado!!");
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
 
-            System.out.println("Iniciando socket na porta 3232...");
-            socket = new Socket("192.168.0.20", 3232);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        InputStream dadosServidor = servidor.getInputStream();
+                        Scanner s = new Scanner(dadosServidor);
+                        while(s.hasNextLine()){
+                            txvRetornoSocket.setText(s.nextLine());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
 
-            System.out.println("Socket iniciado!!");
-            canalSaida = new ObjectOutputStream(socket.getOutputStream());
-            canalSaida.writeObject("Teste");
-
-            canalEntrada = new ObjectInputStream(socket.getInputStream());
-            Object obj = canalEntrada.readObject();
-            if((obj != null) && (obj instanceof String)){
-                txvRetornoSocket.setText(obj.toString());
-            }
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("Erro: "+e.getMessage());
