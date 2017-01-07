@@ -10,13 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.caio.socketstest.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Esperando conexão..."
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:id="@+id/txvRetornoSocket" />
-
     <Button
         android:text="Iniciar Conexão"
         android:layout_width="wrap_content"
@@ -25,4 +18,51 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Mensagem para servidor:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvRetornoSocket"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="56dp"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Esperando conexão..."
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:id="@+id/txvRetornoSocket"
+        android:textSize="24sp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Servidor:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:id="@+id/editText"
+        android:layout_alignParentEnd="true"
+        android:hint="Escreva aqui..." />
+
+    <Button
+        android:text="Enviar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/btnEnviar" />
+
 </RelativeLayout>
