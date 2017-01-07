@@ -1,14 +1,16 @@
 package com.example.caio.socketstest;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button btnConexao;
     private TextView txvRetornoSocket;
-    private Socket servidor;
+    private ProgressDialog load;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 if(v == btnConexao){
                     Toast.makeText(MainActivity.this, "Conectando...", Toast.LENGTH_SHORT).show();
-                    conectarSocket();
+                    ConexaoSocket cs = new ConexaoSocket();
+                    cs.execute();
                 }
             }
         });
@@ -40,33 +43,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
     }
 
-    private void conectarSocket() {
-        try {
-            txvRetornoSocket.setText("Conectando...");
-            servidor = new Socket("192.168.0.20", 3232);
-            txvRetornoSocket.setText("Socket iniciado!!");
+    private class ConexaoSocket extends AsyncTask<Void, Void, Socket>{
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        InputStream dadosServidor = servidor.getInputStream();
-                        Scanner s = new Scanner(dadosServidor);
-                        while(s.hasNextLine()){
-                            txvRetornoSocket.setText(s.nextLine());
-                        }
-                    } catch (IOException e) {
-                        txvRetornoSocket.setText("Exception 4: "+e.getStackTrace());
-                        e.printStackTrace();
+        @Override
+        protected void onPreExecute(){
+            Log.i("AsyncTask", "Exibindo ProgressDialog na tela Thread: "+Thread.currentThread().getName());
+            load = ProgressDialog.show(MainActivity.this, "Por favor aguarde...", "Conectando...");
+        }
+
+        @Override
+        protected Socket doInBackground(Void... voids) {
+            Socket servidor = null;
+            try {
+                servidor = new Socket("192.168.0.20", 3232);
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Erro: "+e.getMessage());
+            }
+            return servidor;
+        }
+
+        @Override
+        protected void onPostExecute(Socket servidor){
+            if(servidor != null){
+                try {
+                    Scanner s = new Scanner(servidor.getInputStream());
+                    while(s.hasNextLine()){
+                        txvRetornoSocket.setText(s.nextLine());
                     }
-
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            }).start();
-
-        }catch (Exception e){
-            txvRetornoSocket.setText("Exception 3: "+e.getStackTrace());
-            e.printStackTrace();
-            System.out.println("Erro: "+e.getMessage());
+            }
         }
     }
 }
+
