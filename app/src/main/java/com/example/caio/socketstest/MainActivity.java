@@ -1,6 +1,5 @@
 package com.example.caio.socketstest;
 
-import android.support.v4.widget.SearchViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 if(v == btnConexao){
                     Toast.makeText(MainActivity.this, "Conectando...", Toast.LENGTH_SHORT).show();
-                    conectarSocket();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            conectarSocket();
+                        }
+                    }).start();
                 }
             }
         });
@@ -43,33 +47,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void conectarSocket() {
         try {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        txvRetornoSocket.setText("Conectando...");
-                        servidor = new Socket("192.168.0.20", 3232);
-                        txvRetornoSocket.setText("Socket iniciado!!");
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
+            try {
+                txvRetornoSocket.setText("Conectando...");
+                servidor = new Socket("192.168.0.20", 3232);
+                txvRetornoSocket.setText("Socket iniciado!!");
+            }catch (IOException e){
+                e.printStackTrace();
+            }
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        InputStream dadosServidor = servidor.getInputStream();
-                        Scanner s = new Scanner(dadosServidor);
-                        while(s.hasNextLine()){
-                            txvRetornoSocket.setText(s.nextLine());
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            try {
+                InputStream dadosServidor = servidor.getInputStream();
+                Scanner s = new Scanner(dadosServidor);
+                while(s.hasNextLine()){
+                    txvRetornoSocket.setText(s.nextLine());
                 }
-            }).start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }catch (Exception e){
             e.printStackTrace();
