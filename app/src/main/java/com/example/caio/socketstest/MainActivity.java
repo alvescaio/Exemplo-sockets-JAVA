@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btnConexao.setEnabled(false);
             btnEnviar.setClickable(true);
             btnEnviar.setEnabled(true);
-            editText.setText("");
             load = ProgressDialog.show(MainActivity.this, "Por favor aguarde...", "Conectando...");
 
         }
@@ -123,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         public void enviarParaServidor(String s){
+            editText.setText("");
             saidaServidor.println(s);
         }
     }
