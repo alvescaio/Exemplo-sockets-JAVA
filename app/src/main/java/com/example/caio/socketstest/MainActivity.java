@@ -33,6 +33,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editText = (EditText) findViewById(R.id.editText);
 
         btnEnviar = (Button) findViewById(R.id.btnEnviar);
+
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v == btnEnviar){
+                    cs.enviarParaServidor(editText.toString());
+                }
+            }
+        });
+
         btnEnviar.setClickable(false);
         btnEnviar.setEnabled(false);
 
@@ -43,15 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(v == btnConexao){
                     Toast.makeText(MainActivity.this, "Conectando...", Toast.LENGTH_SHORT).show();
                     cs.execute();
-                }
-            }
-        });
-
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v == btnEnviar){
-                    cs.enviarParaServidor(editText.toString());
                 }
             }
         });
@@ -85,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 servidor = new Socket("192.168.0.20", 3232);
                 try {
                     saidaServidor = new PrintStream(servidor.getOutputStream());
+                    saidaServidor.println("Fui conectado!");
+
                     Scanner s = new Scanner(servidor.getInputStream());
 
                     while (s.hasNextLine()) {
