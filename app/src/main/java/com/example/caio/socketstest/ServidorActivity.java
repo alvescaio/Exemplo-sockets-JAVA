@@ -1,5 +1,6 @@
 package com.example.caio.socketstest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -21,7 +22,7 @@ import java.net.UnknownHostException;
 import java.nio.ByteOrder;
 import java.util.Scanner;
 
-public class ServidorActivity extends AppCompatActivity{
+public class ServidorActivity extends Activity{
 
     private Button btnIniciarServidor;
     private Button btnEnviar;
