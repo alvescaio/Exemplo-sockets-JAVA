@@ -5,7 +5,7 @@
     density="hdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="8066807117595"
+    timestamp="10613773287512"
     token="-5394241733685107283"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -23,29 +23,22 @@
         duration="0" />
 
     <artifact
-        location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
-        type="RESOURCES" />
+        location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
+        type="DEX" />
 
     <build
-        timestamp="6616633920503"
-        verifier="MANIFEST_FILE_CHANGE" >
+        timestamp="10507116635245"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="7860746450839"
+        timestamp="10613773287512"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
             type="DEX" />
-    </build>
-    <build
-        timestamp="8066807117595"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
-            type="RESOURCES" />
     </build>
 
 </instant-run>

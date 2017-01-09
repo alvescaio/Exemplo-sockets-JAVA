@@ -78,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPreExecute(){
             btnConexao.setClickable(false);
             btnConexao.setEnabled(false);
-            btnEnviar.setClickable(true);
-            btnEnviar.setEnabled(true);
 
             editTextIpServidor.setEnabled(false);
             editTextPortaServidor.setEnabled(false);
@@ -116,6 +114,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onProgressUpdate(String... s) {
             if(s.length > 0){
+
+                if(!btnEnviar.isClickable() || !btnEnviar.isEnabled()) {
+                    btnEnviar.setClickable(true);
+                    btnEnviar.setEnabled(true);
+                }
+
                 if(load.isShowing()){
                     load.dismiss();
                 }

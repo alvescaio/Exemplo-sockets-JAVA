@@ -87,23 +87,15 @@ public class ServidorActivity extends AppCompatActivity{
         protected void onPreExecute(){
             btnIniciarServidor.setClickable(false);
             btnIniciarServidor.setEnabled(false);
-
-            editTextMsgCliente.setVisibility(View.VISIBLE);
-
-            btnEnviar.setVisibility(View.VISIBLE);
-            btnEnviar.setClickable(true);
-            btnEnviar.setEnabled(true);
-
-
         }
 
         @Override
         protected Void doInBackground(String... args) {
             try{
                 ServerSocket servidor = new ServerSocket(this.porta);
-                publishProgress("Esperando cliente...", "Servidor iniciado. \nIp: "+this.ipAparelho+"; Porta: "+this.porta);
+                publishProgress("Esperando cliente...", "Servidor iniciado \nIp: "+this.ipAparelho+" \nPorta: "+this.porta);
                 Socket cliente = servidor.accept();
-                publishProgress("Esperando o cliente conectado...", "Cliente conectado, ip: "+ cliente.getInetAddress().getHostAddress());
+                publishProgress("Esperando o cliente conectado...", "Cliente conectado\nip: "+ cliente.getInetAddress().getHostAddress(), "true");
 
                 this.saidaCliente = new PrintStream(cliente.getOutputStream());
                 this.saidaCliente.println("Vc foi conectado!");
@@ -129,9 +121,19 @@ public class ServidorActivity extends AppCompatActivity{
         protected void onProgressUpdate(String... update) {
             int tam;
             if((tam = update.length) > 0) {
+                if(tam >= 3) {
+                    if (update[2].equals("true")) {
+                        editTextMsgCliente.setVisibility(View.VISIBLE);
+
+                        btnEnviar.setVisibility(View.VISIBLE);
+                        btnEnviar.setClickable(true);
+                        btnEnviar.setEnabled(true);
+                    }
+                }
+
                 if (tam == 1) {
                     txvRespostaCliente.setText(update[0]);
-                }else if(tam == 2){
+                }else if(tam >= 2){
                     txvRespostaCliente.setText(update[0]);
                     txvStatusConexao.setText(update[1]);
                 }

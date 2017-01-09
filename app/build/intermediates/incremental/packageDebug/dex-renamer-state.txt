@@ -1,4 +1,4 @@
-#Mon Jan 09 00:44:34 BRT 2017
+#Mon Jan 09 01:49:48 BRT 2017
 base.0=/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_48139644aa6ff4133f4760865a92923de85330f3
 renamed.1=classes2.dex
 renamed.0=classes.dex
