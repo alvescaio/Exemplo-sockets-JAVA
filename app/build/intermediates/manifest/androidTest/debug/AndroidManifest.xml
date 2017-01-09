@@ -3,7 +3,7 @@
     package="com.example.caio.socketstest.test" >
 
     <uses-sdk
-        android:minSdkVersion="22"
+        android:minSdkVersion="18"
         android:targetSdkVersion="25" />
 
     <instrumentation

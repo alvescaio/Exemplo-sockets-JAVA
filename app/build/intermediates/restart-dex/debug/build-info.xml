@@ -5,9 +5,9 @@
     density="hdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="10613773287512"
+    timestamp="45618097730758"
     token="-5394241733685107283"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
@@ -17,28 +17,21 @@
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="267" />
     <task
         name="verifier"
-        duration="0" />
+        duration="4" />
 
     <artifact
-        location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
-        type="DEX" />
+        location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/outputs/apk/app-debug.apk"
+        type="MAIN" />
 
     <build
-        timestamp="10507116635245"
+        timestamp="45618097730758"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
-    </build>
-    <build
-        timestamp="10613773287512"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
-            type="DEX" />
     </build>
 
 </instant-run>
