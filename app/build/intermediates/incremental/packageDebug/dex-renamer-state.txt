@@ -1,4 +1,7 @@
-#Sat Jan 07 23:28:26 BRT 2017
-base.0=/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+#Mon Jan 09 00:44:34 BRT 2017
+base.0=/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_48139644aa6ff4133f4760865a92923de85330f3
+renamed.1=classes2.dex
 renamed.0=classes.dex
-file.0=/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
+file.1=/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0f6d0adef47050cdfbc1cb356b15059d3eafcda5/classes.dex
+base.1=/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0f6d0adef47050cdfbc1cb356b15059d3eafcda5
+file.0=/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_48139644aa6ff4133f4760865a92923de85330f3/classes.dex

@@ -24,6 +24,10 @@
         "source": "/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
     {
+        "merged": "/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/res/merged/debug/layout/activity_servidor.xml",
+        "source": "/home/caio/AndroidStudioProjects/SocketsTest/app/src/main/res/layout/activity_servidor.xml"
+    },
+    {
         "merged": "/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
         "source": "/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/res/layout/abc_action_bar_up_container.xml"
     },
@@ -34,6 +38,10 @@
     {
         "merged": "/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
         "source": "/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/res/merged/debug/layout/activity_launcher.xml",
+        "source": "/home/caio/AndroidStudioProjects/SocketsTest/app/src/main/res/layout/activity_launcher.xml"
     },
     {
         "merged": "/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",

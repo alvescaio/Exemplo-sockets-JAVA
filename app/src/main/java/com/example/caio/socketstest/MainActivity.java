@@ -4,12 +4,10 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -22,8 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnEnviar;
     private TextView txvRetornoSocket;
     private ProgressDialog load;
-    private EditText editText;
-    private ConexaoSocket cs = new ConexaoSocket();
+    private EditText editText, editTextIpServidor, editTextPortaServidor;
+    private ConexaoSocket cs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +29,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         editText = (EditText) findViewById(R.id.editText);
+        editTextIpServidor = (EditText) findViewById(R.id.editTextIpServidor);
+        editTextPortaServidor = (EditText) findViewById(R.id.editTextPortaServidor);
 
         btnEnviar = (Button) findViewById(R.id.btnEnviar);
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v == btnEnviar){
-                    cs.enviarParaServidor(editText.getText().toString());
-                }
+                cs.enviarParaServidor(editText.getText().toString());
             }
         });
 
@@ -50,8 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnConexao = (Button) findViewById(R.id.btnConexao);
         btnConexao.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(v == btnConexao){
-                    Toast.makeText(MainActivity.this, "Conectando...", Toast.LENGTH_SHORT).show();
+                String ip;
+                int porta;
+                if ((ip = editTextIpServidor.getText().toString()).length() >= 7 && (porta = Integer.parseInt(editTextPortaServidor.getText().toString())) > 0){
+                    cs = new ConexaoSocket(ip, porta);
                     cs.execute();
                 }
             }
@@ -66,23 +66,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private class ConexaoSocket extends AsyncTask<String, String, Void>{
 
         private PrintStream saidaServidor;
+        private int portaServidor;
+        private String ipServidor;
+
+        public ConexaoSocket(String ipServidor, int portaServidor){
+            this.ipServidor = ipServidor;
+            this.portaServidor = portaServidor;
+        }
 
         @Override
         protected void onPreExecute(){
-            Log.i("AsyncTask", "Exibindo ProgressDialog na tela Thread: "+Thread.currentThread().getName());
             btnConexao.setClickable(false);
             btnConexao.setEnabled(false);
             btnEnviar.setClickable(true);
             btnEnviar.setEnabled(true);
-            load = ProgressDialog.show(MainActivity.this, "Por favor aguarde...", "Conectando...");
 
+            editTextIpServidor.setEnabled(false);
+            editTextPortaServidor.setEnabled(false);
+
+            load = ProgressDialog.show(MainActivity.this,"Conctando...","Aguarde...");
         }
 
         @Override
         protected Void doInBackground(String... args) {
             Socket servidor;
             try {
-                servidor = new Socket("192.168.0.20", 3232);
+                servidor = new Socket(this.ipServidor, this.portaServidor);
                 try {
                     saidaServidor = new PrintStream(servidor.getOutputStream());
                     saidaServidor.println("Fui conectado!");

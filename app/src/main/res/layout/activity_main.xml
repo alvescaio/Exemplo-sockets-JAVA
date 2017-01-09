@@ -65,4 +65,36 @@
         android:layout_alignParentEnd="true"
         android:id="@+id/btnEnviar" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_alignTop="@+id/editTextIpServidor"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        android:id="@+id/editTextPortaServidor"
+        android:layout_toEndOf="@+id/txvRetornoSocket"
+        android:hint="PORTA"
+        android:textAlignment="center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editTextIpServidor"
+        android:hint="Digite o IP do servidor"
+        android:layout_above="@+id/btnConexao"
+        android:layout_alignParentStart="true"
+        android:textAlignment="viewStart" />
+
+    <TextView
+        android:text="Informações do servidor:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/editTextPortaServidor"
+        android:layout_alignEnd="@+id/textView2" />
+
 </RelativeLayout>

@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="x86"
-    api-level="25"
+    abi="armeabi-v7a,armeabi"
+    api-level="22"
     density="hdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="29476292337631"
+    timestamp="8066807117595"
     token="-5394241733685107283"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="53855" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="6616" />
+        duration="0" />
     <task
         name="verifier"
-        duration="194" />
+        duration="0" />
 
     <artifact
-        location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+        type="RESOURCES" />
 
     <build
-        timestamp="29476292337631"
-        verifier="FULL_BUILD_REQUESTED" >
+        timestamp="6616633920503"
+        verifier="MANIFEST_FILE_CHANGE" >
         <artifact
             location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="7860746450839"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="8066807117595"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/home/caio/AndroidStudioProjects/SocketsTest/app/build/intermediates/instant-run-resources/resources-debug.ir.ap_"
+            type="RESOURCES" />
     </build>
 
 </instant-run>

@@ -9,6 +9,7 @@
         android:targetSdkVersion="25" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name="com.android.tools.fd.runtime.BootstrapApplication"
@@ -17,7 +18,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.caio.socketstest.MainActivity" >
+        <activity android:name="com.example.caio.socketstest.MainActivity" />
+        <activity android:name="com.example.caio.socketstest.ServidorActivity" />
+        <activity android:name="com.example.caio.socketstest.LauncherActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
